@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'session_api.apps.SessionApiConfig',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,10 +79,10 @@ WSGI_APPLICATION = 'session_service.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'admin_data',
-	'USER': 'root',
-	'PASSWORD': 'admin',
-	'HOST': 'localhost',
+        'NAME': 'session_admin',
+        'USER': 'root',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
         'PORT': '3306'
     }
 }
@@ -116,6 +119,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)
