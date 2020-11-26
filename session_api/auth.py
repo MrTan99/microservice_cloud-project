@@ -30,13 +30,12 @@ class CustomAuthentication(BaseAuthentication):
         """
         try:
             auth_header_value = request.META.get("HTTP_AUTHORIZATION", "")
-            print("allo")
             if auth_header_value:
                 authmeth, auth = request.META["HTTP_AUTHORIZATION"].split(" ", 1)
                 if not auth:
-                    return None
+                    raise ClientNotFound()
                 if not authmeth.lower() == "bearer":
-                    return None
+                    raise ClientNotFound()
                 token = CustomAuthentication.verify_access_token(request, auth)
                 return (token, None)
             else:
@@ -67,6 +66,6 @@ class CustomAuthentication(BaseAuthentication):
                 token.expired = True
                 token.save()
                 raise TokenExpired()
-            return user
+            return token
         else:
             raise ClientNotFound()

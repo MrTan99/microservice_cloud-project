@@ -73,9 +73,10 @@ class LoginAccessView(APIView):
                     )[0]
                 else:
                     token.access_token = generate_client_secret()
-                    token.expiry_date = timezone.now() + timedelta(hours=2)
+                    token.expiry_date = timezone.now() + timedelta(minutes=100)
                     token.refresh_token = generate_client_secret()
                     token.refresh_token_expiry = timezone.now() + timedelta(days=7)
+                    token.expired = False
                     token.save()
                     res = (
                         AuthToken.objects.filter(session_application=client_present)
