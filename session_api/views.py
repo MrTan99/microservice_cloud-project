@@ -160,3 +160,13 @@ class CheckSessionView(APIView):
     parser_classes = (JSONParser,)
     def get(self, request):
         return Response(data={"status": "session not expired"}, status=status.HTTP_200_OK)
+
+class Logout(APIView):
+    authentication_classes = [ CustomAuthentication ]
+    permission_classes = [ ]
+    parser_classes = (JSONParser,)
+    def post(self, request, format=None):
+        print(request.user)
+        # simply delete the token to force a login
+        request.user.delete()
+        return Response(data={"status": "success logout"}, status=status.HTTP_200_OK)
