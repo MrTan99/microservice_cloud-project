@@ -165,7 +165,7 @@ class Logout(APIView):
     authentication_classes = [ CustomAuthentication ]
     permission_classes = [ ]
     parser_classes = (JSONParser,)
-    def post(self, request, format=None):
+    def delete(self, request, format=None):
         print(request.user)
         # simply delete the token to force a login
         request.user.delete()
